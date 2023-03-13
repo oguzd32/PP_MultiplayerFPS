@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Renderer: {fileID: 6525946824605484241}
+  _bulletItem: {fileID: 0}
 --- !u!114 &6525946825741834934
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using Game;
+using Photon.Pun;
 using UnityEngine;
 
 namespace Core.Utilities

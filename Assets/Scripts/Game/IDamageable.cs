@@ -1,6 +1,6 @@
 ﻿using Data.Item;
 
-namespace ActionGame
+namespace Game
 {
     public interface IDamageable
     {

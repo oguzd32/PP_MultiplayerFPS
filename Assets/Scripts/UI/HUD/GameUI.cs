@@ -11,6 +11,8 @@ public class GameUI : Singleton<GameUI>
     [SerializeField] private Image bulletDisplayImage;
     [SerializeField] private TextMeshProUGUI bulletDisplayText;
 
+    [SerializeField] private TextMeshProUGUI nextBulletDisplayText;
+
     public BulletSideBar bulletSideBar;
     
     public bool isPaused 
@@ -75,9 +77,14 @@ public class GameUI : Singleton<GameUI>
         }
     }
 
-    public void UpdateBulletDisplay(BulletItem bulletItem)
+    public void UpdateMyBulletDisplay(BulletItem bulletItem)
     {
         bulletDisplayText.text = bulletItem.size.ToString();
         bulletDisplayImage.color = bulletItem.color;
+    }
+
+    public void UpdateNextBulletDisplay(BulletItem bulletItem)
+    {
+        nextBulletDisplayText.text = $"{bulletItem.colorType.ToString()} - {bulletItem.size.ToString()} size.";
     }
 }

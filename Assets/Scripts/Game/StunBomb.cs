@@ -1,7 +1,7 @@
 using Data.Item;
 using UnityEngine;
 
-namespace ActionGame
+namespace Game
 {
     public class StunBomb : Item.Item
     {

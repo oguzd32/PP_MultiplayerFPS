@@ -5,7 +5,7 @@ using Data.Item;
 using Photon.Pun;
 using UnityEngine;
 
-namespace ActionGame
+namespace Game
 {
     public class TargetSpawner : NetworkSingleton<TargetSpawner>
     {
@@ -14,20 +14,34 @@ namespace ActionGame
 
         public BulletList bulletList;
 
-        private void Start()
+        public BulletItem Spawn()
         {
+            BulletItem bulletItem = GetRandomBulletItem();
+
+            foreach (Target target in targets)
+            {
+                if(target != null)
+                {
+                    PhotonNetwork.Destroy(target.gameObject);                
+                }
+            }
+            
+            targets.Clear();
+            
             for (int i = 0; i < initialTargetCount; i++)
             {
                 Target target = PhotonNetwork
                     .Instantiate(Path.Combine("Photon Prefabs", "Target"), GetRandomPoint(), GetRandomQuaternion())
                     .GetComponent<Target>();
                 
-                target.Initialize(GetRandomBulletItem());
+                target.Initialize(bulletItem);
             
                 targets.Add(target);
             
                 target.OnDie += TargetOnDie;
             }
+
+            return bulletItem;
         }
 
         protected override void OnDestroy()

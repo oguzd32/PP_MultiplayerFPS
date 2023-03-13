@@ -27,6 +27,13 @@ namespace Player
         // Run every physics iteration
         private void FixedUpdate()
         {
+            if (GameUI.instance.isPaused)
+            {
+                JumpForce = 0;
+                Velocity = Rotation = CameraRotation = Vector3.zero;
+                return;
+            }
+            
             PerformMovement();
             PerformRotation();
             PerformJump();

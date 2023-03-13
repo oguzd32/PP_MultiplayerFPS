@@ -34,11 +34,19 @@ namespace Player
         private int bulletTypeIndex;
         private int previousBulletTypeIndex = -1;
 
+        private PlayerManager _playerManager;
+
+        private void Awake()
+        {
+            _movement = GetComponent<PlayerMovement>();
+            _photonView = GetComponent<PhotonView>();
+
+            _playerManager = PhotonView.Find((int)_photonView.InstantiationData[0]).GetComponent<PlayerManager>();
+        }
+
         private void Start()
         {
             isGrounded = true;
-            _movement = GetComponent<PlayerMovement>();
-            _photonView = GetComponent<PhotonView>();
             Cursor.lockState = CursorLockMode.Locked;
 
             if (photonView.IsMine)
@@ -66,7 +74,7 @@ namespace Player
         {
             if(!_photonView.IsMine) return;
             if(GameUI.instance.isPaused) return;
-            
+
             MoveCharacter();
             JumpCharacter();
             RotateCharacter();
@@ -210,7 +218,7 @@ namespace Player
                 Hashtable hash = new Hashtable();
                 hash.Add("BulletIndex", bulletTypeIndex);
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-                GameUI.instance.UpdateBulletDisplay(currentBulletItem);
+                GameUI.instance.UpdateMyBulletDisplay(currentBulletItem);
             }
         }
 

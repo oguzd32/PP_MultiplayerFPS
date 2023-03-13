@@ -3,7 +3,7 @@ using Data.Item;
 using Photon.Pun;
 using UnityEngine;
 
-namespace ActionGame
+namespace Game
 {
     public class Target : MonoBehaviourPunCallbacks, IDamageable
     {
@@ -14,7 +14,7 @@ namespace ActionGame
 
         private PhotonView _photonView;
 
-        private BulletItem _bulletItem;
+        public BulletItem _bulletItem;
 
         private void Awake()
         {
@@ -24,28 +24,40 @@ namespace ActionGame
         public void Initialize(BulletItem bulletItem)
         {
             _bulletItem = bulletItem;
-            m_Renderer.material.color = bulletItem.color;
+            //_photonView.RPC("RPC_Initialize", RpcTarget.All);
+            //m_Renderer.material.color = bulletItem.color;
+        }
+
+        [PunRPC]
+        private void RPC_Initialize()
+        {
+            
         }
 
         public void TakeDamage(BulletItem bullet)
         {
-            if (bullet.colorType == _bulletItem.colorType)
+            if (bullet.colorType == _bulletItem.colorType
+                && bullet.size == _bulletItem.size)
             {
-                _photonView.RPC("RPC_TakeDamage", RpcTarget.All);
+                _photonView.RPC("RPC_AddPoint", RpcTarget.All);
             }
             else
             {
-                
+                _photonView.RPC("RPC_RemovePoint", RpcTarget.All);
             }
         }
 
         [PunRPC]
-        void RPC_TakeDamage()
+        void RPC_AddPoint()
         {
-            if(!_photonView.IsMine) return;
-
-            Debug.Log("took damage");
+            Debug.Log("Add point");
             Die();
+        }
+
+        [PunRPC]
+        void RPC_RemovePoint()
+        {
+            Debug.Log("Remove point");
         }
 
         private void Die()

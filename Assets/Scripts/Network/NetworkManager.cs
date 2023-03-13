@@ -33,7 +33,7 @@ namespace Network
             base.OnJoinedLobby();
             
             FPSMainMenu.instance.ShowButtonsPage();
-            PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
+            //PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
         }
 
         public override void OnJoinedRoom()

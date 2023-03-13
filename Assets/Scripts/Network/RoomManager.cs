@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using Core.Utilities;
+using Game;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,7 +26,7 @@ namespace Network
         {
             if (scene.name == "Game") // We are in the game scene
             {
-                GameObject newPlayer = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "Player"), GetRandomPoint(), Quaternion.identity);
+                GameObject newPlayer = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
                 PhotonView playerNetwork = newPlayer.GetComponent<PhotonView>();
                 playerNetwork.Owner.NickName = "Player" + playerNetwork.GetInstanceID();
             }
@@ -32,17 +34,6 @@ namespace Network
             {
                 
             }
-        }
-        
-        private Vector3 GetRandomPoint()
-        {
-            float x = Random.Range(-45f, 45f);
-            float y = 5f;
-            float z = Random.Range(-45f, 45f);
-
-            Vector3 point = new Vector3(x, y, z);
-            
-            return point;
         }
     }
 }
