@@ -20,14 +20,7 @@ namespace UI
             userNameText.text = PhotonNetwork.NickName;
             */
 
-            if (playerPhotonView.IsMine)
-            {
-                userNameText.text = PhotonNetwork.NickName;
-            }
-            else
-            {
-                userNameText.text = playerPhotonView.Owner.NickName;
-            }
+            userNameText.text = playerPhotonView.Owner.NickName;
         }
     }
 }

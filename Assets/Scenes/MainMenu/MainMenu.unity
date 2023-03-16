@@ -171,7 +171,7 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents: []
-  sceneViewId: 999
+  sceneViewId: 900
   InstantiationId: 0
   isRuntimeInstantiated: 0
 --- !u!114 &211492609
@@ -199,7 +199,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!850595691 &492370816
 LightingSettings:
@@ -324,51 +324,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5db67616b0eb6d4288427efe4fddca1, type: 3}
---- !u!1 &1142755477
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1142755478}
-  - component: {fileID: 1142755479}
-  m_Layer: 0
-  m_Name: ObjectPooler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1142755478
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142755477}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1142755479
+--- !u!114 &1191694650 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 9045062720000051374, guid: 9aedc5fc566856641b1b37d4a9f22b2e, type: 3}
+  m_PrefabInstance: {fileID: 9045062717967752824}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1142755477}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 010da5beca558cd4a95df412ceda9475, type: 3}
+  m_Script: {fileID: 11500000, guid: c0d1aaa4f344d2945af4efc7fc58cf20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolables: []
 --- !u!1 &1520597502
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,6 +707,18 @@ PrefabInstance:
     - target: {fileID: 7334387282893343466, guid: 9aedc5fc566856641b1b37d4a9f22b2e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7855890351492960206, guid: 9aedc5fc566856641b1b37d4a9f22b2e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1191694650}
+    - target: {fileID: 7855890351492960206, guid: 9aedc5fc566856641b1b37d4a9f22b2e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ShowButtonsPage
+      objectReference: {fileID: 0}
+    - target: {fileID: 7855890351492960206, guid: 9aedc5fc566856641b1b37d4a9f22b2e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UI.MainMenu.FPSMainMenu, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 9045062718445148964, guid: 9aedc5fc566856641b1b37d4a9f22b2e, type: 3}
       propertyPath: m_AnchorMax.y

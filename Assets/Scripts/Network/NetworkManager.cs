@@ -1,14 +1,9 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
-using Core.UI;
 using Core.Utilities;
 using Photon.Pun;
 using Photon.Realtime;
-using UI;
 using UI.MainMenu;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 
 namespace Network
 {
@@ -16,30 +11,23 @@ namespace Network
     {
         private void Start()
         {
-            PhotonNetwork.ConnectUsingSettings();
+            PhotonNetwork.ConnectUsingSettings();   
             FPSMainMenu.instance.ShowLoadingPage();
         }
 
         public override void OnConnectedToMaster()
         {
-            base.OnConnectedToMaster();
-
             PhotonNetwork.JoinLobby();
             PhotonNetwork.AutomaticallySyncScene = true;
         }
 
         public override void OnJoinedLobby()
         {
-            base.OnJoinedLobby();
-            
             FPSMainMenu.instance.ShowButtonsPage();
-            //PhotonNetwork.NickName = "Player " + Random.Range(0, 1000).ToString("0000");
         }
 
         public override void OnJoinedRoom()
         {
-            base.OnJoinedRoom();
-            
             FPSMainMenu.instance.ShowRoomPage();
             FPSMainMenu.instance.roomMenuPage.roomNameText.text = PhotonNetwork.CurrentRoom.Name;
 
@@ -63,14 +51,17 @@ namespace Network
 
         public override void OnLeftRoom()
         {
-            base.OnLeftRoom();
-
             FPSMainMenu.instance.ShowButtonsPage();
         }
 
         public void CreateRoom(string roomName)
         {
-            PhotonNetwork.CreateRoom(roomName);
+            RoomOptions roomOptions = new RoomOptions()
+            {
+                CleanupCacheOnLeave = false,
+            };
+            
+            PhotonNetwork.CreateRoom(roomName, roomOptions);
         }
 
         public void LeaveRoom()

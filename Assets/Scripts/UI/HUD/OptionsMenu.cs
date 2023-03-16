@@ -1,5 +1,5 @@
 ﻿using Core.UI;
-using Network;
+using Photon.Pun;
 using UnityEngine;
 
 namespace UI.HUD
@@ -8,7 +8,7 @@ namespace UI.HUD
     {
         public void OnClickLeaveRoom()
         {
-            
+            PhotonNetwork.Disconnect();
         }
 
         public override void Hide()

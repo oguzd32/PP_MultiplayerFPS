@@ -1396,6 +1396,8 @@ MonoBehaviour:
   sprintSpeed: 15
   lookSensitivity: 10
   jumpForce: 300
+  clampX: {x: -48.5, y: 48.5}
+  clampZ: {x: -48.5, y: 48.5}
   gun: {fileID: 3064924703074950811}
   bomb: {fileID: 7236002630161435329}
   BulletList: {fileID: 11400000, guid: 17874833e69d6794bb9d6850c965df56, type: 2}

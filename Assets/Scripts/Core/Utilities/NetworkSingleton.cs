@@ -30,7 +30,7 @@ namespace Core.Utilities
 		{
 			if (instanceExists)
 			{
-				Destroy(gameObject);
+				PhotonNetwork.Destroy(gameObject);
 			}
 			else
 			{

@@ -14,7 +14,9 @@ namespace Player
         [SerializeField] private float sprintSpeed;
         [SerializeField] private float lookSensitivity = 3f;
         [SerializeField] private float jumpForce;
-        
+        [SerializeField] private Vector2 clampX;
+        [SerializeField] private Vector2 clampZ;
+         
         [Space] 
         [SerializeField] private Item.Item gun;
 
@@ -91,7 +93,18 @@ namespace Player
             {
                 //bomb.Use();
             }
+            
+            ClamPos();
         }
+
+        private void ClamPos()
+        {
+            Vector3 refPos = transform.position;
+            refPos.x = Mathf.Clamp(refPos.x, clampX.x, clampX.y);
+            refPos.z = Mathf.Clamp(refPos.z, clampZ.x, clampZ.y);
+            transform.position = refPos;
+        }
+        
         private void HotKey()
         {
             for (int i = 0; i < BulletList.configuration.Count; i++)
@@ -197,10 +210,11 @@ namespace Player
                 _photonView = GetComponent<PhotonView>();
             }
             
+            /*
             if (!_photonView.IsMine && targetPlayer == _photonView.Owner)
             {
                 ChangeBullet((int)changedProps["BulletIndex"]);
-            }
+            }*/
         }
 
         private void ChangeBullet(int index)

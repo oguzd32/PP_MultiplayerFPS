@@ -1,5 +1,7 @@
 using Core.Utilities;
 using Data.Item;
+using Game;
+using Photon.Pun;
 using TMPro;
 using UI.HUD;
 using UnityEngine;
@@ -10,8 +12,11 @@ public class GameUI : Singleton<GameUI>
     [SerializeField] private OptionsMenu optionsMenu;
     [SerializeField] private Image bulletDisplayImage;
     [SerializeField] private TextMeshProUGUI bulletDisplayText;
-
     [SerializeField] private TextMeshProUGUI nextBulletDisplayText;
+    [SerializeField] private Image nextBulletImage;
+    [SerializeField] private TextMeshProUGUI timerText;
+
+    public PhotonView photonView;
 
     public BulletSideBar bulletSideBar;
     
@@ -45,6 +50,7 @@ public class GameUI : Singleton<GameUI>
             isPaused = !isPaused;
             ShowOrHideOptions();
         }
+        
     }
 
     private void ShowOrHideOptions()
@@ -86,5 +92,6 @@ public class GameUI : Singleton<GameUI>
     public void UpdateNextBulletDisplay(BulletItem bulletItem)
     {
         nextBulletDisplayText.text = $"{bulletItem.colorType.ToString()} - {bulletItem.size.ToString()} size.";
+        nextBulletImage.color = bulletItem.color;
     }
 }

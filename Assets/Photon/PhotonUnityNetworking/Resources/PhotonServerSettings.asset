@@ -44,6 +44,14 @@ MonoBehaviour:
   - RPC_RemovePoint
   - RPC_Initialize
   - RPC_Shoot
+  - RPC_DecreasePoint
+  - RPC_IncreasePoint
+  - Initialize
+  - GetRandomBulletItem
+  - RPC_Cube
+  - RPC_SyncTargets
+  - TimeLeft
+  - RPC_TimeLeft
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

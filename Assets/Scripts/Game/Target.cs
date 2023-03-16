@@ -1,37 +1,26 @@
 using System;
 using Data.Item;
 using Photon.Pun;
+using Player;
 using UnityEngine;
 
 namespace Game
 {
-    public class Target : MonoBehaviourPunCallbacks, IDamageable
+    public class Target : MonoBehaviour, IDamageable
     {
         public Renderer m_Renderer;
 
         public event Action OnSpawn;
         public event Action OnDie;
 
-        private PhotonView _photonView;
+        public PhotonView _photonView;
+
 
         public BulletItem _bulletItem;
-
-        private void Awake()
-        {
-            _photonView = GetComponent<PhotonView>();
-        }
 
         public void Initialize(BulletItem bulletItem)
         {
             _bulletItem = bulletItem;
-            //_photonView.RPC("RPC_Initialize", RpcTarget.All);
-            //m_Renderer.material.color = bulletItem.color;
-        }
-
-        [PunRPC]
-        private void RPC_Initialize()
-        {
-            
         }
 
         public void TakeDamage(BulletItem bullet)
@@ -39,31 +28,35 @@ namespace Game
             if (bullet.colorType == _bulletItem.colorType
                 && bullet.size == _bulletItem.size)
             {
-                _photonView.RPC("RPC_AddPoint", RpcTarget.All);
+                _photonView.RPC(nameof(RPC_AddPoint), _photonView.Owner);
             }
             else
             {
-                _photonView.RPC("RPC_RemovePoint", RpcTarget.All);
+                _photonView.RPC(nameof(RPC_RemovePoint), _photonView.Owner);
             }
         }
 
         [PunRPC]
-        void RPC_AddPoint()
+        void RPC_AddPoint(PhotonMessageInfo info)
         {
-            Debug.Log("Add point");
+            PlayerManager.Find(info.Sender).IncreasePoint();
             Die();
         }
 
         [PunRPC]
-        void RPC_RemovePoint()
+        void RPC_RemovePoint(PhotonMessageInfo info)
         {
-            Debug.Log("Remove point");
+            PlayerManager.Find(info.Sender).DecreasePoint();
+            Die();
         }
 
         private void Die()
         {
             OnDie?.Invoke();
-            PhotonNetwork.Destroy(gameObject);
+            if (_photonView.IsMine)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

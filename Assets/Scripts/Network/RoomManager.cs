@@ -26,14 +26,19 @@ namespace Network
         {
             if (scene.name == "Game") // We are in the game scene
             {
-                GameObject newPlayer = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+                GameObject newPlayer = PhotonNetwork.Instantiate(Path.Combine("Photon Prefabs", "PlayerManager"), Vector3.zero, Quaternion.identity, 0);
                 PhotonView playerNetwork = newPlayer.GetComponent<PhotonView>();
-                playerNetwork.Owner.NickName = "Player" + playerNetwork.GetInstanceID();
             }
             else if (scene.name == "MainMenu") // we are in the main menu
             {
                 
             }
+        }
+
+        public override void OnLeftRoom()
+        {
+            Destroy(gameObject);
+            PhotonNetwork.LoadLevel("MainMenu");
         }
     }
 }

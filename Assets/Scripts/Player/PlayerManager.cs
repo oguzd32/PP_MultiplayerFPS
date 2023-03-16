@@ -1,16 +1,17 @@
-using System;
 using System.IO;
+using System.Linq;
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
     public class PlayerManager : MonoBehaviour
     {
         private PhotonView _photonView;
-
         private GameObject _controller;
+        public int points;
         
         private void Awake()
         {
@@ -44,6 +45,41 @@ namespace Player
             Vector3 point = new Vector3(x, y, z);
             
             return point;
+        } 
+
+        public static PlayerManager Find(Photon.Realtime.Player player)
+        {
+            return FindObjectsOfType<PlayerManager>().SingleOrDefault(x => x._photonView.Owner == player);
+        }
+
+        public void IncreasePoint()
+        {
+            _photonView.RPC(nameof(RPC_IncreasePoint), _photonView.Owner);
+        }
+
+        public void DecreasePoint()
+        {
+            _photonView.RPC(nameof(RPC_DecreasePoint), _photonView.Owner);
+        }
+
+        [PunRPC]
+        private void RPC_IncreasePoint()
+        {
+            points++;
+
+            Hashtable hash = new Hashtable();
+            hash.Add("points", points);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        }
+
+        [PunRPC]
+        private void RPC_DecreasePoint()
+        {
+            points--;
+            
+            Hashtable hash = new Hashtable();
+            hash.Add("points", points);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
     }
 }
